@@ -1,5 +1,7 @@
 <template>
   <select v-model="selectedSeason" @change="handleChange" name="queen-filter" id="queen-filter">
+      <option selected="selected" disabled="disabled">Select a Season!</option>
+      <option :value="null">All Seasons</option>
       <option v-for="season in seasons" :key="season.id" :value="season.id">
           Season {{season.seasonNumber}}
       </option>

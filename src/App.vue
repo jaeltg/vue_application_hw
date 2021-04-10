@@ -3,7 +3,7 @@
   <h1>RuPaul's Drag Race Queens!!!</h1>
   <queen-filter :seasons="seasons"/>
   <div id="grid-container">
-  <queens-list :queens="queens"/>
+  <queens-list :queens="filteredQueens"/>
   <queen-details v-if="selectedQueen" :queen="selectedQueen"/>
   </div>
   </section>
@@ -28,11 +28,17 @@ export default {
   },
   computed: {
     filteredQueens: function() {
-      return this.queens.filter((queen) => {
-       for (const season in queen.seasonInfo.seasons) {
-          return season.seasonId == selectedSeason.id
-        } 
-      })
+      let filteredArray = []
+      for (const queen of this.queens) {
+        for (const season of queen.seasonInfo.seasons) {
+          if (season.seasonId === this.selectedSeason) {
+            filteredArray.push(queen)
+          } else if (this.selectedSeason === null) {
+           filteredArray = this.queens
+          }
+        }
+      }
+     return filteredArray
     }
   },
 
