@@ -1,7 +1,7 @@
 <template>
   <section id="app">
   <h1>RuPaul's Drag Race Queens!!!</h1>
-  <queen-filter :seasons="seasons"/>
+  <queen-filter :seasons="seasons" :queens="queens"/>
   <div id="grid-container">
   <queens-list :queens="filteredQueens"/>
   <queen-details v-if="selectedQueen" :queen="selectedQueen"/>
@@ -23,18 +23,26 @@ export default {
       queens: [],
       selectedQueen: null,
       seasons: [],
-      selectedSeason: null
+      selectedSeason: null,
+      challengeWinData: [],
+      selectedQueens: []
     }
   },
   computed: {
     filteredQueens: function() {
-      let filteredArray = []
-      for (const queen of this.queens) {
+      let filteredArray = [];
+      let queenArray = [];
+      if (this.selectedQueens.length !== 0) {
+        queenArray = this.selectedQueens
+      } else {
+        queenArray = this.queens
+      }
+      for (const queen of queenArray) {
         for (const season of queen.seasonInfo.seasons) {
           if (season.seasonId === this.selectedSeason) {
             filteredArray.push(queen)
           } else if (this.selectedSeason === null) {
-           filteredArray = this.queens
+           filteredArray = queenArray
           }
         }
       }
@@ -47,19 +55,22 @@ export default {
     const data1 = await response1.json()
     this.seasons = data1
     
-
     const response = await fetch('http://www.nokeynoshade.party/api/queens/all')
     const data = await response.json()
     this.queens = this.addSeasonInfoToQueen(data)
   
-
+    
     eventBus.$on('queen-selected', (queenSent) => {
       this.selectedQueen = queenSent;
     })
 
     eventBus.$on('season-selected', (seasonSent) => {
       this.selectedSeason = seasonSent
-    })  
+    })
+
+    eventBus.$on('queens-selected', (queensSent) => {
+      this.selectedQueens = queensSent
+    })
     
   },
 
@@ -109,7 +120,28 @@ export default {
         }
       })
       return queens
-    }
+    },
+
+    // fetchQueenChallengeData:  async function() {
+    //   if (this.selectedQueen) {
+    //   const response = await fetch(`http://www.nokeynoshade.party/api/queens/${this.selectedQueen.id}/challenges`)
+    //   const data = await response.json()
+    //   this.challengeWinData = this.formatChallengeWinData(data)
+    //   }
+    // },
+
+    // formatChallengeWinData: function(challengeData) {
+    //   let array = [];
+    //   let wins;
+    //   let losses;
+    //   const winData = challengeData.map((challenge) => {
+    //     return challenge.won 
+    //   })
+    //   wins = winData.filter(Boolean).length/winData.length
+    //   losses = 1 - wins
+    //   array = [["Won", "Lost"], [wins, losses]]
+    //   return array 
+    // }
 
   }
 
