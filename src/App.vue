@@ -1,9 +1,10 @@
 <template>
   <section id="app">
   <h1>RuPaul's Drag Race Queens!!!</h1>
+  <queen-filter :seasons="seasons"/>
   <div id="grid-container">
   <queens-list :queens="queens"/>
-  <queen-details v-if="selectedQueen" :queen="selectedQueen" :seasons="seasons"/>
+  <queen-details v-if="selectedQueen" :queen="selectedQueen"/>
   </div>
   </section>
 </template>
@@ -13,6 +14,7 @@ import {eventBus} from './main.js'
 
 import QueensList from './components/QueensList'
 import QueenDetails from './components/QueenDetails'
+import QueenFilter from './components/QueenFilter'
 
 export default {
   name: 'App',
@@ -21,6 +23,16 @@ export default {
       queens: [],
       selectedQueen: null,
       seasons: [],
+      selectedSeason: null
+    }
+  },
+  computed: {
+    filteredQueens: function() {
+      return this.queens.filter((queen) => {
+       for (const season in queen.seasonInfo.seasons) {
+          return season.seasonId == selectedSeason.id
+        } 
+      })
     }
   },
 
@@ -38,11 +50,17 @@ export default {
     eventBus.$on('queen-selected', (queenSent) => {
       this.selectedQueen = queenSent;
     })
+
+    eventBus.$on('season-selected', (seasonSent) => {
+      this.selectedSeason = seasonSent
+    })  
+    
   },
 
   components: {
     'queens-list': QueensList,
-    'queen-details': QueenDetails
+    'queen-details': QueenDetails,
+    'queen-filter': QueenFilter
   },
 
   methods: {
@@ -55,8 +73,8 @@ export default {
           queenId: queen.id,
           seasons: [{
             place: queen.place,
-            season: season.seasonNumber,
-            seasonID: season.id
+            seasonNumber: season.seasonNumber,
+            seasonId: season.id
           }]
         }
         array.push(queenSeasonInfo)
