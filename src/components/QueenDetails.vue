@@ -9,13 +9,24 @@
     </ul>
   <p v-if="queen.winner">Winner</p>
   <p v-if="queen.missCongeniality">Miss Congeniality</p>
+  <queen-stats :challengeWinData="challengeWinData"/>
 </section>
 </template>
 
 <script>
+import QueenStats from './QueenStats'
+
 export default {
     name: 'queen-detail',
-    props: ['queen']
+    props: ['queen','challengeWinData'],
+    data() {
+      return {
+        
+      }
+    },
+    components: {
+      'queen-stats': QueenStats
+    }
 }
 </script>
 

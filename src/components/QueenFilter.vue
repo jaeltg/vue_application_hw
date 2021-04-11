@@ -1,13 +1,13 @@
 <template>
 <section>
   <select v-model="selectedSeason" @change="handleChange" name="queen-filter" id="queen-filter">
-      <option selected disabled="disabled">Select a Season!</option>
+      <option value=" " selected disabled>Select a Season!</option>
       <option :value="null">All Seasons</option>
       <option v-for="season in seasons" :key="season.id" :value="season.id">
           Season {{season.seasonNumber}}
       </option>
   </select>
-  <input type="text" v-model="search" placeholder="search for queen..." v-on:keyup="searchForQueen">
+  <input type="text" v-model="search" placeholder="Search for a Queen!" v-on:keyup="searchForQueen">
 </section> 
 </template>
 

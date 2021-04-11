@@ -9,12 +9,6 @@ export default {
     name: 'queen-item',
     props: ['queen'],
 
-    data() {
-        return {
-            challengeWinData: [],
-        }
-    },
-
     methods: {
         handleClick: function() {
             eventBus.$emit('queen-selected', this.queen)

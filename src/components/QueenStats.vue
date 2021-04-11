@@ -1,5 +1,8 @@
 <template>
-  <chart/>
+<section>
+  <h4>Challenges</h4>
+  <chart type='PieChart' :data='challengeWinData' :option='chartOptions'/>
+</section>
 </template>
 
 <script>
@@ -13,7 +16,7 @@ data () {
         chartOptions: {}
     }
 },
-props: ['winData'],
+props: ['challengeWinData'],
 components: {
     'chart': GChart
 },
