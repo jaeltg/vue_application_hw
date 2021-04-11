@@ -1,9 +1,13 @@
 <template>
   <section id="app">
-  <h1>RuPaul's Drag Race Queens!!!</h1>
-  <queen-filter :seasons="seasons" :queens="queens"/>
+  <img id="logo" src="../public/images/rupauls-logo.png" alt="RuPaul's Drag Race">
+  <h1>Queens</h1>
+  
   <div id="grid-container">
+  <div>
+  <queen-filter :seasons="seasons" :queens="queens"/>
   <queens-list :queens="filteredQueens"/>
+  </div>  
   <queen-details v-if="selectedQueen" :queen="selectedQueen" :challengeWinData="challengeWinData"/>
   </div>
   </section>
@@ -110,6 +114,8 @@ export default {
 
     cleanSeasonInfoArray: function() {
       const seasonInfo = this.extractSeasonInfo()
+      // obj - new object 
+      // item - each season info object in the array
       const cleanedObject = seasonInfo.reduce((obj, item) => {
         obj[item.queenId] ? obj[item.queenId].seasons.push(...item.seasons) : (obj[item.queenId] ={...item});
         return obj;
@@ -150,16 +156,46 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0%;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
+
+h1 {
+  font-family: 'Lobster', cursive;
+  font-size: 50px;
+  color: rgb(252, 85, 182);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-family: 'Lobster', cursive;
+  font-size: 30px;
+  color: rgb(252, 85, 182)
+}
+
+h4{
+  font-family: 'Lobster', cursive;
+  font-size: 20px;
+  color: rgb(252, 85, 182)
+}
+
 #grid-container {
   display: grid;
-  grid-template-columns: 1fr 3fr
+  grid-template-columns: 1fr 2fr
+}
+
+#logo {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 0;
 }
 </style>

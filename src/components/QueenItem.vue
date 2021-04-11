@@ -1,5 +1,5 @@
 <template>
-  <li v-if="queen.name != 'Sh*rry P**'" @click="handleClick">{{queen.name}}</li>
+  <li v-if="queen.name != 'Sh*rry P**'" @click="handleClick" id="queen-item">{{queen.name}}</li>
 </template>
 
 <script>
@@ -18,6 +18,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+#queen-item:hover {
+    background-color:rgb(252, 85, 182);
+    color: white;
+
+}
 
 </style>

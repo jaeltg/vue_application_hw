@@ -22,12 +22,12 @@ export default {
 #queens-scroll {
     overflow-y: scroll;
     height: 400px;
-    width: 250px;
+    width: auto;
 }
 
 
 #queens-list {
     list-style: none;
-    text-align: left;
+    text-align: center;
 }
 </style>
