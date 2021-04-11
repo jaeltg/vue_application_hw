@@ -61,6 +61,7 @@ export default {
     padding-right: auto;
     padding-top: 10px;
     padding-bottom: 10px;
+    margin-left: 20px
 }
 #filter-section > h4 {
     margin-top: 0px;

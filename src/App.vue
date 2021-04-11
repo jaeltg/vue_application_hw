@@ -173,7 +173,13 @@ h1 {
   font-size: 50px;
   color: rgb(252, 85, 182);
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 17px;
+  width: 80%;
+  border:  rgb(252, 85, 182) solid 4px;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #AEF3E7
 }
 
 h3 {

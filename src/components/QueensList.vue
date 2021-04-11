@@ -29,5 +29,7 @@ export default {
 #queens-list {
     list-style: none;
     text-align: center;
+    padding-left: 0;
+    margin-left: 20px;
 }
 </style>
