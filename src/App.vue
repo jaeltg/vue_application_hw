@@ -8,7 +8,7 @@
   <queen-filter :seasons="seasons" :queens="queens"/>
   <queens-list :queens="filteredQueens"/>
   </div>  
-  <queen-details v-if="selectedQueen" :queen="selectedQueen" :challengeWinData="challengeWinData"/>
+  <queen-details :queen="selectedQueen" :challengeWinData="challengeWinData"/>
   </div>
   </section>
 </template>

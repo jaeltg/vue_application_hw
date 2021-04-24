@@ -1,5 +1,10 @@
 <template>
 <section>
+<section v-if="!queen">
+  <h3 id="welcome">Welcome</h3>
+   <img id="rupaul-image" src="images/RuPaul.jpeg" alt="RuPaul">
+</section>
+<section v-if="queen">
   <h3 id="name">{{queen.name}}</h3>
   <div id="queen-tags">
     <p v-if="queen.winner" id="winner">Winner</p>
@@ -18,6 +23,7 @@
   <queen-stats :challengeWinData="challengeWinData"/>
   </div>  
   </div>
+</section>
 </section>
 </template>
 
@@ -82,5 +88,8 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr;
 
+}
+#welcome {
+  font-size: 50px
 }
 </style>
